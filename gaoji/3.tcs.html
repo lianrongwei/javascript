@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>贪吃蛇案例</title>
+    <script src="GonefourFrames.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            background-color: #333333;
+        }
+
+        .map {
+            width: 800px;
+            height: 600px;
+            /*background-color: #cccccc;*/
+            background: url("./images/timg.jpg") no-repeat center;
+            background-size: auto;
+            position: relative;
+            margin: 3px auto;
+        }
+
+    </style>
+</head>
+<body>
+<!--画出地图，设置样式-->
+<div style="width: 800px;height: 30px; line-height:30px;  background-color: pink; margin: 0 auto; margin-top: 10px;">
+    <span> 分数：</span><span id="span">0</span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span>吃数：</span><span
+        id="zs">0</span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span>等级：</span><span id="lv">0</span>
+</div>
+<div class="map" id="map"></div>
+<script src="food.js"></script>
+<script src="snake.js"></script>
+<script src="game.js"></script>
+</body>
+</html>

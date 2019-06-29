@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>闭包点赞</title>
+    <script src="GonefourFrames.js"></script>
+    <style>
+        ul {
+            list-style-type: none;
+        }
+
+        li {
+            float: left;
+            margin-left: 10px;
+        }
+
+        img {
+            width: 200px;
+            height: 180px;
+        }
+
+        input {
+            margin-left: 30%;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li><img src="images/ly.jpg" alt=""><br/><input type="button" value="赞(0)"></li>
+    <li><img src="images/lyml.jpg" alt=""><br/><input type="button" value="赞(0)"></li>
+    <li><img src="images/fj.jpg" alt=""><br/><input type="button" value="赞(0)"></li>
+    <li><img src="images/bd.jpg" alt=""><br/><input type="button" value="赞(0)"></li>
+</ul>
+
+<script>
+    var inputObj = tagName$("input");
+
+    function getValue() {
+        let value = 0;
+        return function () {
+            ++value;
+            if (value <= 9) {
+                this.value = "赞(" + value + ")";
+                console.log(value);
+            } else if (value <= 19) {
+                this.value = "赞(999+)";
+                console.log(value);
+            } else if (value <= 25) {
+                this.value = "赞(1w+)";
+                console.log(value);
+            } else if (value <= 30) {
+                this.value = "赞(100w+)";
+                console.log(value);
+            } else {
+                this.value = "赞(1000w+)";
+                console.log(value);
+            }
+            console.log(this.value);
+        }
+    }
+
+    for (var i = 0; i < inputObj.length; i++) {
+        addEventListener$(inputObj[i], "click", getValue());
+    }
+
+    //递归实现：求n个数字的和
+    function getSum(x) {
+        if (x == 1) {
+            return 1;
+        }
+        return x + getSum(x - 1);
+    }
+
+    //递归案例：求一个数字各个位数的数字的和如123 = 1+2+3 =6
+    function getEverySum(x) {
+        if (x < 10) {
+            return x;
+        }
+        return x % 10 + getEverySum(parseInt(x / 10));
+    }
+
+    //递归案例：求斐波那契数列
+    function getFib(x) {
+        if (x == 1 || x == 2) {
+            return 1;
+        }
+        return getFib(x - 1) + getFib(x - 2);
+    }
+
+
+    var obj1 = {
+        age: 10,
+        car: ["奔驰", "宝马", "特斯拉", "奥拓"],
+        dog: {
+            name: "大黄",
+            age: 5,
+            color: "红色"
+        },
+        sex: "男",
+        fun: function () {
+            console.log("函数");
+        }
+    };
+    var obj2 = {};
+
+
+
+    //深拷贝
+    function extend(a, b) {
+        for (var key in a) {
+            var item = a[key];
+            if (item instanceof Array) {
+                b[key] = [];
+                extend(item, b[key]);
+            } else if (item instanceof Object) {
+                b[key] = {};
+                extend(item, b[key]);
+            } else {
+                b[key] = item;
+            }
+        }
+    }
+
+    extend(obj1, obj2);
+    console.dir(obj1);
+    console.dir(obj2);
+    // //浅拷贝
+    // for (var key in obj1) {
+    //     obj2[key] = obj1[key];
+    // }
+    // console.dir(obj1);
+    // console.dir(obj2);
+
+</script>
+</body>
+1
+</html>

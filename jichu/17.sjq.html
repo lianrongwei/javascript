@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>手风琴</title>
+    <script src="GonefourFrames.js"></script>
+    <style>
+
+        ul {
+            list-style: none;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            width: 1150px;
+            height: 400px;
+            margin: 50px auto;
+            border: 1px solid red;
+            overflow: hidden;
+        }
+
+        div li {
+            width: 240px;
+            height: 400px;
+            float: left;
+        }
+
+        div ul {
+            width: 1300px;
+        }
+
+
+    </style>
+</head>
+<body>
+<div id="box">
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+<script>
+    var box = id$("box");
+    var ulObj = box.children[0];
+    var liObj = ulObj.children;
+    for (var i=0;i<liObj.length;i++){
+        liObj[i].style.backgroundImage = "url(img-sfq/" + (i + 1) + ".jpg)";
+        addEventListener$(liObj[i],"mouseover",function () {
+            for (var j=0;j<liObj.length;j++){
+                animates(liObj[j],{"width":100});
+            }
+            animates(this,{"width":800});
+        });
+        addEventListener$(liObj[i],"mouseout",function () {
+            for (var j=0;j<liObj.length;j++){
+                animates(liObj[j],{"width":240});
+            }
+        });
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>开机动画</title>
+    <script src="GonefourFrames.js"></script>
+    <style>
+        .box {
+            width: 322px;
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            overflow: hidden;
+        }
+
+        span {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 30px;
+            height: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="box" id="box">
+    <span id="closeButton"></span>
+    <div class="hd" id="headPart">
+        <img src="img-kj/t.jpg" alt=""/>
+    </div>
+    <div class="bd" id="bottomPart">
+        <img src="img-kj/b.jpg" alt=""/>
+    </div>
+</div>
+
+<script>
+    id$("closeButton").onclick = function () {
+      animates(id$("bottomPart"),{"height":0},function () {
+         animates(id$("box"),{"width":0},function () {
+             animates(id$("box"),{"width":322},function (){
+                 animates(id$("bottomPart"),{"height":id$("bottomPart").children[0].offsetHeight});
+             });
+         });
+      });
+    };
+</script>
+</body>
+</html>

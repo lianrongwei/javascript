@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="GonefourFrames.js"></script>
+</head>
+<body>
+<script>
+    function Person(name, age, sex) {
+        this.name = name;
+        this.age = age;
+        this.sex = sex;
+    }
+
+    Person.prototype.eat = function () {
+        console.log("人会吃");
+    };
+
+    function Student(name, age, sex, score) {
+        Person.call(this, name, age, sex);//组合继承
+        this.score = score;
+    }
+
+    Student.prototype = new Person();//继承，不传参数就不继承属性，继承方法
+    Student.prototype.study = function () {
+        console.log("学生会学习");
+    }
+
+    var obj = {};
+    for (var key in Student.prototype) {
+        obj[key] = Student.prototype[key];
+    }
+    obj.name = "小米";
+    obj.age = 18;
+    obj.sex = "女";
+    obj.score = "100分";
+    console.dir(obj);
+    console.log(obj.name, obj.age, obj.sex,obj.score);
+    obj.eat();
+    obj.study();
+    // var stu1 = new Student("小明", 20, "男", "100分");
+    // console.log(stu1.name, stu1.age, stu1.sex,stu1.score);
+    // stu1.eat();
+    // stu1.study();
+    // console.log("+++++++++");
+    // var stu1 = new Student("小红", 18, "女", "90分");
+    // console.log(stu1.name, stu1.age, stu1.sex,stu1.score);
+    // stu1.eat();
+    // stu1.study();
+</script>
+
+</body>
+</html>

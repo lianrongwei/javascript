@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="GonefourFrames.js"></script>
+    <style>
+        li{
+            list-style: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li>张三的成绩</li>
+    <li>李四的成绩</li>
+    <li>王五的成绩</li>
+    <li>赵柳的成绩</li>
+</ul>
+<script>
+   var lis = tagName$("li");
+   var arr = [510,610,70,80];
+   for (var i=0; i<lis.length;i++) {
+       lis[i].setAttribute("score",arr[i]);
+       lis[i].onclick = function () {
+          console.log(this.getAttribute("score"));
+       }
+   }
+</script>
+
+</body>
+</html>

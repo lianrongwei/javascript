@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function Person(name,age) {
+        this.name = name;
+        this.age = age;
+    }
+    //简单的原型写法
+    Person.prototype = {
+        constructor : Person,
+        eat : function () {
+            console.log("你好！"+ this.name);
+        },
+        height:180
+    }
+    var p1 = new Person("小三",18);
+    var p2 = new Person("搜索",20);
+    console.dir(Person);
+    console.dir(p1);
+    console.dir(p2);
+
+    (function (win) {
+        function Randoms() {
+
+        }
+        Randoms.prototype.getRandom = function (min,max) {
+            return Math.floor(Math.random() * (max-min) + min);
+        }
+        win.Random = Randoms;
+    })(window);
+10,20
+    20-10+10
+    var num = new Random();
+    console.dir(num.getRandom(10,20));
+    console.dir(num.getRandom(0,10));
+
+</script>
+
+</body>
+</html>

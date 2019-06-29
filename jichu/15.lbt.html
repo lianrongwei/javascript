@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>完整轮播图</title>
+    <script src="GonefourFrames.js"></script>
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            border: 0;
+        }
+
+        .all {
+            width: 500px;
+            height: 200px;
+            padding: 7px;
+            border: 1px solid #ccc;
+            margin: 100px auto;
+            position: relative;
+        }
+
+        .screen {
+            width: 500px;
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .screen li {
+            width: 500px;
+            height: 200px;
+            overflow: hidden;
+            float: left;
+        }
+
+        .screen ul {
+            position: absolute;
+            left: 0;
+            top: 0px;
+            width: 3000px;
+        }
+
+        .all ol {
+            position: absolute;
+            left: 50%;
+            bottom: 5px;
+            transform: translateX(-50%);
+            text-align: center;
+        }
+
+        .all ol li {
+            float: left;
+            width: 10px;
+            height: 10px;
+            line-height: 10px;
+            font-size: 10px;
+            border-radius: 50%;
+            background: #fff;
+            border: 1px solid #ccc;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        .all ol li.current {
+            background: #DB192A;
+        }
+
+        #arr {
+            display: none;
+        }
+
+        #arr span {
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            left: 5px;
+            top: 50%;
+            margin-top: -20px;
+            background: #000;
+            cursor: pointer;
+            line-height: 40px;
+            text-align: center;
+            font-weight: bold;
+            font-family: '黑体';
+            font-size: 30px;
+            color: #fff;
+            opacity: 0.3;
+            border: 1px solid #fff;
+        }
+
+        #arr #right {
+            right: 5px;
+            left: auto;
+        }
+    </style>
+</head>
+<body>
+<div class="all" id='box'>
+    <div class="screen"><!--相框-->
+        <ul>
+            <li><img src="images/1.jpg" width="500" height="200"/></li>
+            <li><img src="images/2.jpg" width="500" height="200"/></li>
+            <li><img src="images/3.jpg" width="500" height="200"/></li>
+            <li><img src="images/4.jpg" width="500" height="200"/></li>
+            <li><img src="images/5.jpg" width="500" height="200"/></li>
+        </ul>
+        <ol>
+        </ol>
+    </div>
+    <div id="arr"><span id="left">&lt;</span><span id="right">&gt;</span></div>
+</div>
+
+<script>
+    //获取最外面div
+    var box = id$("box");
+    //获取相框
+    var screen = box.children[0];
+    //获取相框宽度
+    var imgWidth = screen.offsetWidth;
+    //获取ul
+    var ulObj = screen.children[0];
+    //获取ul li
+    var list = ulObj.children;
+    //获取ol
+    var olObj = screen.children[1];
+    //焦点div
+    var arr = id$("arr");
+    //当前索引
+    var index = 0;
+    //创建小按钮---根据ul中的li个数
+    for (var i = 0; i < list.length; i++) {
+        //创建li，加入到ol中
+        var liObj = createElement$("li");
+        olObj.appendChild(liObj);
+        setInnerText(liObj, i + 1);
+        //在li中添加自定义属性index,索引值
+        liObj.setAttribute("index", i);
+        //创建鼠标进入事件
+        addEventListener$(liObj, "mouseover", mouseoverHandle);
+    }
+    //ol中li的鼠标进入事件
+    function mouseoverHandle() {
+        for (var i = 0; i < olObj.children.length; i++) {
+            //清除所有ol中的li的背景色
+            olObj.children[i].removeAttribute("class");
+        }
+        //设置当前进入背景色
+        this.className = "current";
+        //获取鼠标进入的li的索引值
+        index = this.getAttribute("index");
+        //移动ul
+        animateMoveX(ulObj, -index * imgWidth, 30, 20);
+    }
+    //克隆一个ul中第一个li。加入到ul中的最后
+    ulObj.appendChild(ulObj.children[0].cloneNode(true));
+    //索引第一个
+    olObj.children[0].className = "current";
+    //定时器自动轮播
+    var timeId=setInterval(rightClickHandle,5000);
+    //鼠标进入到box的div显示左右焦点的div
+    addEventListener$(box, "mouseover", function () {
+        arr.style.display = "block";
+        clearInterval(timeId);
+    });
+    //左边按钮
+    addEventListener$(id$("left"), "click", function () {
+        if (index == 0) {
+            index = list.length - 1;
+            ulObj.style.left = -index * imgWidth + "px";
+        }
+        index--;
+        animateMoveX(ulObj, -index * imgWidth, 30, 20);
+
+        for (var i = 0; i < olObj.children.length; i++) {
+            //清除所有ol中的li的背景色
+            olObj.children[i].removeAttribute("class");
+        }
+        olObj.children[index].className = "current";
+    });
+    //右边按钮
+    addEventListener$(id$("right"), "click", rightClickHandle);
+    function rightClickHandle() {
+        if (index == list.length - 1) {
+            index = 0;
+            ulObj.style.left = 0 + "px";
+        }
+        index++;
+        animateMoveX(ulObj, -index * imgWidth, 30, 20);
+        //如果index == 5，此时显示第6个图（内容是图片的第一张）。第一个小按钮有背景色
+        if (index == list.length - 1) {
+            olObj.children[0].className = "current";
+            olObj.children[olObj.children.length - 1].removeAttribute("class");
+        } else {
+            for (var i = 0; i < olObj.children.length; i++) {
+                //清除所有ol中的li的背景色
+                olObj.children[i].removeAttribute("class");
+            }
+            olObj.children[index].className = "current";
+        }
+    }
+    //鼠标离开到box的div隐藏左右焦点的div
+    addEventListener$(box, "mouseout", function () {
+        arr.style.display = "none";
+        timeId=setInterval(rightClickHandle,5000);
+    });
+
+
+</script>
+</body>
+</html>

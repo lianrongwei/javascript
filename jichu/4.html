@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="GonefourFrames.js"></script>
+</head>
+<body>
+<div id="dv" style="width: 200px; height: 200px; background-color: red; margin: 0 auto;"></div>
+<script>
+    // // 输入，年月日，获取这个日期是这一年的第几天
+    // function getDays(year, month, day) {
+    //     //定义变量存储对应的天数
+    //     var days = day;
+    //     //如果用户输入的是一月份，没必要往后计算天数，直接返回天数
+    //     if (month == 1) {
+    //         return days;
+    //     }
+    //     //定义一个数组存储不是闰年的每个月份的天数
+    //     var months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    //
+    //     //循环每个月天数累加
+    //     for (var i = 0; i < month - 1; i++) {
+    //         days += months[i];
+    //     }
+    //
+    //     //判断是否闰年，是闰年天数多加一天
+    //     if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0 && month > 2) {
+    //         days++;
+    //     }
+    //
+    //     return days;
+    // }
+    //
+    // console.log(getDays(2019, 4, 2));//91
+    //
+
+    // var weekDay = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+    // var myDate = new Date(Date.parse("2019/4/2"));
+    // console.log(weekDay[myDate.getDay()]);    // 星期二
+
+    // 伪数组
+    // function f1() {
+    //     var sum = 0;
+    //     for (var i=0;i<arguments.length;i++){
+    //         sum+=arguments[i];
+    //     }
+    //     return sum;
+    // }
+    //
+    // console.log(f1(1,2,3,4,5,6,7,8,9,10,20));//75
+
+    // function f1(fn) {
+    //     console.log("我是F1");
+    //     fn();
+    // }
+    // function f2(fn) {
+    //     console.log("我是F2");
+    //     fn();
+    // }
+    // function f3() {
+    //     console.log("我是F3");
+    // }
+    // // f1(f3);
+    // {
+    //     var num = 10;
+    //     let  n = 20;
+    //     console.log(num);
+    //     console.log(n);
+    // }
+    // console.log(num);
+
+
+    // var obj =new Object();
+    // obj.name = "aa";
+    // obj.age = 18;
+    // obj.fn = function () {
+    //     console.log("我是"+this.name + "今年" + this.age+"sui");
+    // }
+    //
+    // obj.fn();
+
+    // function craterObj(name,age) {
+    //     var obj =new Object();
+    //     obj.name = name;
+    //     obj.age = age;
+    //     obj.eat = function () {
+    //         console.log("w s" + this.name + "j n" + this.age);
+    //     }
+    //     return obj;
+    // }
+    //
+    // var aa = craterObj("学习",18);
+    // aa.eat();
+    // function Person(name,age) {
+    //     this.name = name;
+    //     this.age = age;
+    //     this.eat = function () {
+    //         console.log("我是" + this.name + ",今年" + this.age + "岁了。");
+    //     }
+    // }
+    // var p =new Person("小明",20);
+    // console.log(p.name);
+    // console.log(p.age);
+    // p.eat();
+    // var a =new Person("小米",25);
+    // console.log(a.name);
+    // console.log(a.age);
+    // a.eat();
+
+    // var p = {
+    //     name:"小明",
+    //     age:20,
+    //     eat:function () {
+    //         console.log(this.name,this.age);
+    //     }
+    // }
+    // p.eat();
+
+    // var arr = [10,0,2,3,8,9,1];
+    // for (var i=0;i<arr.length-1;i++){
+    //     for (var j=0; j<arr.length-1-i;j++){
+    //         if (arr[j] > arr[j+1]){
+    //             let temp = arr[j];
+    //             arr[j] = arr[j+1];
+    //             arr[j+1] = temp;
+    //         }
+    //         console.log(arr);
+    //     }
+    // }
+
+    // console.log(Math.max(10,20,50,100,0));
+    // function  MyMax() {
+    //     this.getMax = function () {
+    //         var max = arguments[0];
+    //         for (var i=0;i<arguments.length;i++){
+    //             if (max < arguments[i]){
+    //                 max = arguments[i];
+    //             }
+    //         }
+    //         return max;
+    //     }
+    //
+    // }
+    //
+    // var obj = new MyMax();
+    // var result = obj.getMax(10,100,112,120,0);
+    // console.log(result);
+    window.onload = function () {
+        document.getElementById("dv").style.backgroundColor = getRandomColor();
+    }
+    // var d = new Date();
+    // console.log(d.toDateString());
+    // console.log(d.toLocaleDateString());
+    // console.log(d.toTimeString());
+    // console.log(d.toLocaleTimeString());
+    // if (d.toLocaleTimeString().charAt() == "下"){
+    //     console.log("下午");
+    // }
+
+    // console.log(getDate(new Date()));
+
+    // 找出字符串中o的索引位置
+    // var str = "hello wod odd ott dbo byho";
+    // var index = 0;
+    // var key = "o";
+    // while ((index = str.indexOf(key,index)) != -1 ){
+    //     console.log(index);
+    //     index += key.length;
+    // }
+
+    // // 找到这个字符串中每个字符串出现的次数
+    // var str ="ABCabcAbcAbc";
+    // str = str.toLocaleLowerCase();
+    // var obj = {};
+    // for (var i=0;i<str.length;i++){
+    //     var key = str[i];
+    //     if (obj[key]){
+    //         obj[key]++;
+    //     }else{
+    //         obj[key] = 1;
+    //     }
+    // }
+    // for (var key in obj){
+    //     console.log(key +":"+obj[key]);
+    // }
+
+    // var obj = ["a","b","c","d","a"];
+    // var o = Array.from(obj);
+    // console.log(o);
+    //
+    // var obj = [1000,2000,3000];
+    // var b = obj.every(function (a,b) {
+    //     return a >2000;
+    // })
+    // console.log(b);
+
+    // var obj = [10, 20, 30, 50, 40, 60, 100];
+    // console.log(obj.sort());
+    // var arr = obj.sort((a, b) => {
+    //     return a > b ? 1 : -1;
+    // });
+    // console.log(arr);
+    // console.log(arr.reverse());
+
+    // console.log(getRandomColor());
+    // var index = parseInt(Math.random() * 10);
+    // console.log(index);
+
+    var arr = [5,6,4,7,8,0];
+    for (var i=0;i<arr.length-1;i++){
+        for (var j=0;j<arr.length-1-i;j++){
+            if (arr[j]>arr[j+1]){
+                var temp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = temp;
+            }
+            console.log(arr);
+        }
+    }
+</script>
+
+
+</body>
+</html>

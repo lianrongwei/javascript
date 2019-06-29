@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="GonefourFrames.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            width: 400px;
+            height: 400px;
+            border: 1px solid red;
+        }
+
+        .td{
+            width: 90px;
+            border: 1px solid red;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<input type="button" value="创建表格" id="btn"/>
+<div id="dv"></div>
+<script>
+
+    var arr = [
+        {name: "百度", href: "http://www.baidu.com"},
+        {name: "QQ", href: "http://www.qq.com"},
+        {name: "优酷", href: "http://www.youku.com"},
+        {name: "爱奇艺", href: "http://www.iqiyi.com"},
+        {name: "淘宝", href: "http://www.taobao.com"},
+        {name: "京东", href: "http://www.jd.com"}
+    ];
+    id$("btn").onmouseover = function () {
+
+      var tableObj = createElement$("table");
+      tableObj.id = "tableID";
+      id$("dv").appendChild(tableObj);
+      for (var i=0;i<arr.length;i++) {
+          var dt = arr[i];
+          var trObj = createElement$("tr");
+          tableObj.appendChild(trObj);
+
+          var tdObj1 = createElement$("td");
+          setInnerText(tdObj1,dt.name);
+          trObj.appendChild(tdObj1);
+          tdObj1.className = "td";
+
+          var tdObj2 = createElement$("td");
+          tdObj2.innerHTML = "<a target='_blank' href="+dt.href+">"+dt.name+"</a>";
+          trObj.appendChild(tdObj2);
+          tdObj2.className = "td";
+
+      }
+    };
+    id$("btn").onmouseout = function () {
+        if (id$("tableID")) {
+            id$("dv").removeChild(id$("tableID"));
+        }
+    }
+</script>
+</body>
+</html>

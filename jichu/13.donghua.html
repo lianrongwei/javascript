@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动画</title>
+    <script src="GonefourFrames.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            width: 150px;
+            height: 100px;
+            /*margin-top: 20px;*/
+            background-color: green;
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: aqua;
+            /*opacity: 1;*/
+        }
+
+        input {
+            /*margin: 10px;*/
+            position: relative;
+            z-index: 5;
+        }
+    </style>
+</head>
+<body>
+
+<input type="button" value="移动到0px" id="btn1"/>
+<input type="button" value="移动到400px" id="btn2"/>
+<input type="button" value="移动到800px" id="btn3"/>
+<div id="dv">123123123</br>12312312312</br>3123123</div>
+<script>
+
+    addEventListener$(id$("btn1"), "click", function () {
+        animateMoveX(id$("dv"), 0, 10, 20);
+        // console.log("aa");
+    });
+    // addEventListener$(id$("btn2"), "click", function () {
+    //
+    // });
+    id$("btn2").onclick = function () {
+        animates(id$("dv"), {"height": 500, "width": 500, "top": 100, "left": 300,"backgroundColor":"red","color":"#fff"}, function () {
+            animates(id$("dv"), {"height": 100, "width": 150, "top": 0, "left": 0,"zIndex":1000,"backgroundColor":"yellow","color":"red"});
+        });
+    }
+    addEventListener$(id$("btn3"), "click", function () {
+        animate(id$("dv"), "width", 800);
+    });
+
+</script>
+
+</ body>
+</html>

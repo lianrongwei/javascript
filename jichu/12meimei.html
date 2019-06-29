@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="GonefourFrames.js"></script>
+</head>
+<body>
+<img src="" alt="" id="im">
+<script>
+    function f1() {
+        var dt = new Date();
+        var hour = dt.getHours();
+        var second = dt.getSeconds();
+        hour = hour < 10 ? "0" + hour : hour;
+        second = second < 10 ? "0" + second : second;
+        id$("im").src = "meimei/" + hour + "_" + second + ".jpg";
+    }
+    f1();
+    window.setInterval(f1, 1000);
+</script>
+</body>
+</html>

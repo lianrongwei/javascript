@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="GonefourFrames.js"></script>
+    <style>
+        #dv1{
+            width: 400px;
+            height: 400px;
+            background-color: red;
+        }
+        #dv2{
+            width: 120px;
+            height: 120px;
+            background-color: blue;
+        }
+        #dv3{
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+        }
+        #dv4{
+            width: 50px;
+            height: 100px;
+            background-color: yellow;
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="dv1">
+    <div id="dv2">
+        <div id="dv4"></div>
+    </div>
+    <div id="dv3"></div>
+</div>
+<div id="dv"></div>
+<script>
+    // addEventListener$(id$("btn"),"click",function () {
+    //     var pObj = createElement$("p");
+    //    for (var i=0;i<=5;i++){
+    //        var pObj = createElement$("p");
+    //        id$("dv").appendChild(pObj);
+    //        setInnerText(pObj,i);
+    //    }
+    // });
+    // addEventListener$(id$("btn"),"click",function () {
+    //     var pObj = createElement$("p");
+    //     for (var i=0;i<=10;i++){
+    //         var pObj = createElement$("p");
+    //         id$("dv").appendChild(pObj);
+    //         setInnerText(pObj,i);
+    //     }
+    // });
+    function f1() {
+        console.log("我是一s1");
+    }
+    function f2(){
+        console.log("我是二");
+        window.event.cancelBubble = true;
+    }
+    function f3(){
+        console.log("我是s=三");
+        window.event.cancelBubble = true;
+    }
+    function f4(e){
+        console.log("我是s=si斯");
+        e.stopPropagation();
+        console.log(e);
+        // window.event.cancelBubble = true;
+    }
+    addEventListener$(id$("dv1"),"click",f1);
+    addEventListener$(id$("dv2"),"click",f2);
+    addEventListener$(id$("dv3"),"click",f3);
+    addEventListener$(id$("dv4"),"click",f4);
+    // id$("btn").onclick = f1;
+
+    // id$("btn2").onclick = function () {
+    //     // id$("btn").onclick = null;
+    //     removeEventListener$(id$("btn"),"click",f1);
+    //     // id$("btn").removeEventListener("click",f2,false);
+    // };
+
+</script>
+</body>
+</html>

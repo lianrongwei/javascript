@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>排序</title>
+    <script src="GonefourFrames.js"></script>
+</head>
+<body>
+<script>
+
+
+    //排序，根据电影名字，大小，时间
+
+    //电影有名字，有大小，有时间
+    function Film(name, size, time) {
+        this.name = name;
+        this.size = size;
+        this.time = time;
+    }
+
+    var f1 = new Film("aake.avi", "400m", "2018-12-03");
+    var f2 = new Film("bome.avi", "200m", "1997-12-02");
+    var f3 = new Film("ciao.avi", "800m", "1997-12-01");
+    var f4 = new Film("ciao.avi", "800m", "1996-12-01");
+
+    var arr = [f1, f2, f3, f4];
+
+    function getSort(attr) {
+        return (a, b) => {
+            return a[attr] > b[attr] ? 1 : a[attr] == b[attr] ? 0 : -1;
+        };
+    }
+
+    var result = arr.sort(getSort("time"))
+
+    for (var i = 0; i < result.length; i++) {
+        console.log(result[i].name + "======>" + result[i].size + "======>" + result[i].time);
+    }
+
+    function bb() {
+        var num = 0;
+        return function () {
+            num++;
+            return num;
+        }
+    }
+
+    var bib = bb();
+    console.log(bib());
+    console.log(bib());
+    console.log(bib());
+</script>
+
+</body>
+</html>

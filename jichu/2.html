@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>年份</title>
+</head>
+<body>
+<script>
+    var year = parseInt(prompt("请您输入年份"));
+    if(!isNaN(year)){
+        if (year % 4 == 0 && year % 100 !=0 || year %400 == 0){
+            console.log("闰年");
+        } else{
+            console.log("平年");
+        }
+    }else{
+        console.log("输入错误");
+    }
+</script>
+</body>
+</html>

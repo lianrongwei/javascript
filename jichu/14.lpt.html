@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>轮播图</title>
+    <script src="GonefourFrames.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+
+        ul {
+            list-style: none
+        }
+
+        img {
+            vertical-align: top
+        }
+
+        .box {
+            width: 730px;
+            height: 454px;
+            margin: 100px auto;
+            padding: 5px;
+            border: 1px solid #ccc;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .inner {
+            width: 730px;
+            height: 454px;
+            background-color: pink;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .inner ul {
+            width: 1000%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .inner li {
+            float: left;
+        }
+
+        .square {
+            position: absolute;
+            left: 50%;
+            bottom: 10px;
+            transform: translateX(-50%);
+        }
+
+        .square span {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background-color: #fff;
+            text-align: center;
+            line-height: 16px;
+            cursor: pointer;
+        }
+
+        .square span.current {
+            background-color: orangered;
+            color: #fff;
+        }
+        #focusD{
+            width: 730px;
+            position: absolute;
+            top: 45%;
+            display: none;
+        }
+        #focusD span {
+            display: inline-block;
+            width: 50px;
+            height: 53px;
+            line-height: 50px;
+            background-color:rgba(255,255,0,.5);
+            color: white;
+            font-size: 50px;
+            text-align: center;
+            position: absolute;
+            cursor: pointer;
+
+        }
+        #left{
+            left: 0px;
+        }
+        #right{
+            right: 0px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="box" id="box">
+    <div class="inner"><!--相框-->
+        <ul>
+            <li><a href="#"><img src="images/1.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="images/2.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="images/3.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="images/4.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="images/5.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="images/6.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="images/1.jpg" alt=""/></a></li>
+        </ul>
+        <div class="square">
+            <span class="current">1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+            <span>5</span>
+            <span>6</span>
+        </div>
+    </div>
+    <div id="focusD">
+        <span  id="left">&lt;</span>
+        <span  id="right">&gt;</span>
+    </div>
+</div>
+<script>
+
+
+    //获取最外面的div
+    var box = id$("box");
+    //获取相框
+    var inner = box.children[0];
+    //获取相框的宽度
+    var imgWidth = inner.offsetWidth;
+    var indexImgWidth = imgWidth;
+    //获取ul
+    var ulObj = inner.children[0];
+    //获取所有span
+    var spanObjs = inner.children[1].children;
+    //循环遍历所有span
+    for (var i = 0; i < spanObjs.length; i++) {
+        spanObjs[i].setAttribute("index", i);
+        addEventListener$(spanObjs[i], "click", clickHandle);
+    }
+
+    function clickHandle() {
+        //先干掉所有span的背景色
+        for (var i = 0; i < spanObjs.length; i++) {
+            spanObjs[i].removeAttribute("class");
+        }
+        //设置当前的span的背景色
+        this.className = "current";
+        //当前的索引
+        var index = parseInt(this.getAttribute("index"));
+        //移动位置
+        var step = 60;
+        //移动ul
+        animateMoveX(ulObj, -(imgWidth * index), step, 20);
+    }
+
+    //获取左右按钮父级div
+    var focusD = id$("focusD");
+
+    //进入ul事件
+    addEventListener$(box,"mouseover",function () {
+        focusD.style.display = "block";
+    });
+    addEventListener$(box,"mouseout",function () {
+        focusD.style.display = "none";
+    });
+
+    var index = 0;
+    var indexImgWidth = -imgWidth * index;
+
+    //点击左边按钮
+    addEventListener$(id$("left"),"click",function () {
+        if (index > 0){
+            index--;
+            animateMoveX(ulObj, -(imgWidth * index), 60, 20);
+        }
+
+    });
+    //点击右边按钮
+    addEventListener$(id$("right"),"click",function () {
+        // if (index < ulObj.children.length -1){
+        //     index++;
+        //     animateMoveX(ulObj, -(imgWidth * index), 60, 20);
+        //     console.log(-(imgWidth * index));
+        // }
+        if (-(imgWidth * index) <= -4380){
+            ulObj.style.left = 0;
+            // imgWidth ;
+            index=0;
+        }else{
+            index++;
+            animateMoveX(ulObj, -(imgWidth * index), 60, 20);
+            console.log(-(imgWidth * index));
+        }
+    });
+</script>
+</body>
+</html>

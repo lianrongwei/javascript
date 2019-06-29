@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>背景图跟随</title>
+    <script src="GonefourFrames.js"></script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        body{
+            height: 2000px;
+            background-color: red;
+        }
+        img {
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+
+<img src="images/bird.png" alt="" id="im">
+<script>
+
+    document.onmousemove = function (e) {
+      id$("im").style.left = evt.getPageX(e) + "px";
+      id$("im").style.top = evt.getPageY(e) + "px";
+    };
+</script>
+</body>
+</html>

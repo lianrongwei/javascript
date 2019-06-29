@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="GonefourFrames.js"></script>
+    <style>
+        div{
+            width: 200px;
+            height: 200px;
+            background-color: aqua;
+            border: 1px solid red;
+        }
+        .hie{
+            display: none;
+        }
+    </style>
+</head>
+<input type="button" value="隐藏" id="dj" />
+<div id="dv">
+    <input type="text" value="">
+    <input type="text" value="">
+    <input type="text" value="">
+</div>
+<p>123456</p>
+<p>123456</p>
+<input type="text" value="你好啊" id="in"/>
+<span class="cla">789</span>
+<span class="cla">789</span>
+<span class="cla">789</span>
+<body>
+<script>
+
+        var dj = id$("dj");
+        dj.onclick=function () {
+            if(dj.value == "隐藏"){
+                id$("dv").className = "hie";
+                this.value = "显示";
+                name$("p")[0].style.color = "red";
+            }else{
+                id$("dv").className = "";
+                this.value = "隐藏";
+                name$("p")[0].style.color = "green";
+            }
+
+        }
+
+        id$("dv").onclick = function () {
+           var a = idNameChild$("dv","input");
+           for (var i=0;i<a.length;i++){
+               a[i].value = "1000" + i;
+           }
+        }
+
+        id$("in").oninput = function () {
+            var cl = class$("cla");
+            for (var i=0;i<cl.length;i++){
+                cl[i].innerText = id$("in").value;
+            }
+        }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>旋转木马</title>
+    <script src="GonefourFrames.js"></script>
+    <style>
+        /*初始化  reset*/
+        blockquote, body, button, dd, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, hr, input, legend, li, ol, p, pre, td, textarea, th, ul {
+            margin: 0;
+            padding: 0
+        }
+
+        body, button, input, select, textarea {
+            font: 12px/1.5 "Microsoft YaHei", "微软雅黑", SimSun, "宋体", sans-serif;
+            color: #666;
+        }
+
+        ol, ul {
+            list-style: none
+        }
+
+        a {
+            text-decoration: none
+        }
+
+        fieldset, img {
+            border: 0;
+            vertical-align: top;
+        }
+
+        a, input, button, select, textarea {
+            outline: none;
+        }
+
+        a, button {
+            cursor: pointer;
+        }
+
+        .wrap {
+            width: 1200px;
+            margin: 100px auto;
+        }
+
+        .slide {
+            height: 500px;
+            position: relative;
+        }
+
+        .slide li {
+            position: absolute;
+            left: 200px;
+            top: 0;
+        }
+
+        .slide li img {
+            width: 100%;
+        }
+
+        .arrow {
+            opacity: 0;
+        }
+
+        .prev, .next {
+            width: 76px;
+            height: 112px;
+            position: absolute;
+            top: 50%;
+            margin-top: -56px;
+            background: url(images/prev.png) no-repeat;
+            z-index: 99;
+        }
+
+        .next {
+            right: 0;
+            background-image: url(images/next.png);
+        }
+    </style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+    <div class="slide" id="slide">
+        <ul>
+            <li><a href="#"><img src="images/slidepic1.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="images/slidepic2.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="images/slidepic3.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="images/slidepic4.jpg" alt=""/></a></li>
+            <li><a href="#"><img src="images/slidepic5.jpg" alt=""/></a></li>
+        </ul>
+        <div class="arrow" id="arrow">
+            <a href="javascript:;" class="prev" id="arrLeft"></a>
+            <a href="javascript:;" class="next" id="arrRight"></a>
+        </div>
+    </div>
+</div>
+
+<!--<div style="height: 20px;background-color: aqua;"></div>-->
+<script>
+    var config = [
+        {
+            width: 400,
+            top: 20,
+            left: 50,
+            opacity: 0.2,
+            zIndex: 2
+        },//0
+        {
+            width: 600,
+            top: 70,
+            left: 0,
+            opacity: 0.8,
+            zIndex: 3
+        },//1
+        {
+            width: 800,
+            top: 100,
+            left: 200,
+            opacity: 1,
+            zIndex: 4
+        },//2
+        {
+            width: 600,
+            top: 70,
+            left: 600,
+            opacity: 0.8,
+            zIndex: 3
+        },//3
+        {
+            width: 400,
+            top: 20,
+            left: 750,
+            opacity: 0.2,
+            zIndex: 2
+        }//4
+
+    ];
+
+    window.onload = function () {
+        var flag = true;
+        var list = slide.getElementsByTagName("li");
+
+        function assgin() {
+            for (var i = 0; i < list.length; i++) {
+                animates(list[i], config[i], function () {
+                    flag = true;
+                });
+            }
+        }
+
+        assgin();
+
+        addEventListener$(id$("arrLeft"), "click", function () {
+            if (flag) {
+                flag = false;
+                config.push(config.shift());
+                assgin();
+            }
+
+        });
+        addEventListener$(id$("arrRight"), "click", autoScroll);
+        function autoScroll() {
+            if (flag) {
+                flag = false;
+                config.unshift(config.pop());
+                assgin();
+            }
+
+        }
+
+        var timeId =setInterval(autoScroll,3000);
+        id$("slide").onmouseover = function () {
+            id$("arrow").style.opacity = 1;
+            clearInterval(timeId);
+        };
+        id$("slide").onmouseout = function () {
+            timeId =setInterval(autoScroll,3000);
+            id$("arrow").style.opacity = 0;
+        }
+
+
+    };
+</script>
+</body>
+</html>
